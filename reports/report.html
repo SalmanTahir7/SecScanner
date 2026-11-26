@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>SecScanner Report</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:40px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:8px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.critical{
+    color:#fff;
+    background:#c62828;
+    padding:6px;
+    display:inline-block;
+}
+
+.high{
+    color:#fff;
+    background:#ef6c00;
+    padding:6px;
+    display:inline-block;
+}
+
+.medium{
+    color:#000;
+    background:#fdd835;
+    padding:6px;
+    display:inline-block;
+}
+
+.low{
+    color:#fff;
+    background:#2e7d32;
+    padding:6px;
+    display:inline-block;
+}
+
+pre{
+    background:#eee;
+    padding:15px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡️ SecScanner AI Report</h1>
+
+<h3>File: vulnerable.py</h3>
+
+<h3>Total Findings: 4</h3>
+
+
+
+<div class="card">
+
+<h2 class="critical">
+CRITICAL
+</h2>
+
+<p><b>Type:</b> SQL Injection</p>
+
+<p><b>Description:</b></p>
+
+<p>User input is directly concatenated into a SQL query.</p>
+
+<p><b>Impact:</b></p>
+
+<p>Full database compromise or unauthorized data access.</p>
+
+<p><b>Recommended Fix</b></p>
+
+<pre>Use parameterized queries (e.g., cursor.execute('SELECT * FROM users WHERE username = ?', (username,)))</pre>
+
+</div>
+
+
+
+<div class="card">
+
+<h2 class="critical">
+CRITICAL
+</h2>
+
+<p><b>Type:</b> OS Command Injection</p>
+
+<p><b>Description:</b></p>
+
+<p>User input is passed directly to os.system.</p>
+
+<p><b>Impact:</b></p>
+
+<p>Remote Code Execution (RCE) on the host system.</p>
+
+<p><b>Recommended Fix</b></p>
+
+<pre>Avoid using os.system with user input; use the subprocess module with shell=False and pass arguments as a list.</pre>
+
+</div>
+
+
+
+<div class="card">
+
+<h2 class="high">
+HIGH
+</h2>
+
+<p><b>Type:</b> Hardcoded Credentials</p>
+
+<p><b>Description:</b></p>
+
+<p>Hardcoded database password and API secret found in source code.</p>
+
+<p><b>Impact:</b></p>
+
+<p>Exposure of sensitive credentials through version control.</p>
+
+<p><b>Recommended Fix</b></p>
+
+<pre>Use environment variables or a secure secret management service.</pre>
+
+</div>
+
+
+
+<div class="card">
+
+<h2 class="medium">
+MEDIUM
+</h2>
+
+<p><b>Type:</b> Insecure Cryptographic Hash</p>
+
+<p><b>Description:</b></p>
+
+<p>MD5 is used for hashing passwords.</p>
+
+<p><b>Impact:</b></p>
+
+<p>Passwords are susceptible to fast cracking and collision attacks.</p>
+
+<p><b>Recommended Fix</b></p>
+
+<pre>Use a slow, salted password hashing algorithm like Argon2 or bcrypt.</pre>
+
+</div>
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>SecScanner Report</title>
+
+<style>
+
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f4f4;
+    margin:40px;
+}
+
+.container{
+    max-width:1000px;
+    margin:auto;
+}
+
+.card{
+    background:white;
+    border-radius:8px;
+    padding:20px;
+    margin-bottom:20px;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+}
+
+.critical{
+    color:#fff;
+    background:#c62828;
+    padding:6px;
+    display:inline-block;
+}
+
+.high{
+    color:#fff;
+    background:#ef6c00;
+    padding:6px;
+    display:inline-block;
+}
+
+.medium{
+    color:#000;
+    background:#fdd835;
+    padding:6px;
+    display:inline-block;
+}
+
+.low{
+    color:#fff;
+    background:#2e7d32;
+    padding:6px;
+    display:inline-block;
+}
+
+pre{
+    background:#eee;
+    padding:15px;
+    overflow:auto;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🛡️ SecScanner AI Report</h1>
+
+<h3>File: {{ filename }}</h3>
+
+<h3>Total Findings: {{ findings|length }}</h3>
+
+{% for issue in findings %}
+
+<div class="card">
+
+<h2 class="{{ issue.severity.lower() }}">
+{{ issue.severity }}
+</h2>
+
+<p><b>Type:</b> {{ issue.type }}</p>
+
+<p><b>Description:</b></p>
+
+<p>{{ issue.description }}</p>
+
+<p><b>Line:</b>{{ issue.line }}</p>
+
+<p><b>Impact:</b></p>
+
+<p>{{ issue.impact }}</p>
+
+<p><b>Recommended Fix</b></p>
+
+<pre>{{ issue.fix }}</pre>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</body>
+</html>
